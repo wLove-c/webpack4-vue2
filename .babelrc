@@ -1,0 +1,16 @@
+// .babelrc
+{
+	"presets": [
+		["env", { "modules": false }],
+		"stage-3"
+	],
+	"plugins": [[  //  参考 https://www.jianshu.com/p/7a7f7abcddb5
+		"transform-runtime",
+		{
+			"helpers": false,
+			"polyfill": false,
+			"regenerator": true,
+			"moduleName": "babel-runtime"
+		}
+	]]
+}
