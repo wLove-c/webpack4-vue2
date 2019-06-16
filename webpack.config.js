@@ -13,7 +13,14 @@ module.exports = {  //module.exports commonjs规范
   },
   devServer: {
     historyApiFallback: true,
-    overlay: true
+    overlay: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000', // 接口的域名和端口 如果端口为80则可以不写
+        pathRewrite: {'^/api' : ''}, // 如果不是以api开头的可以清空
+        changeOrigin: true,     // target是域名的话，需要这个参数，
+        secure: false,          // 默认情况下，不接受运行在 HTTPS 上，且使用了无效证书的后端服务器。如果你想要接受，修改配置如下：
+      },
   },
   resolve: {
     alias: {
