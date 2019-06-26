@@ -7,7 +7,7 @@ import Vue from 'vue';
 
 const say = function () {
   return new Promise((resolve, reject) => {
-    resolve('I am es7');
+    resolve('I am es9');
   })
 }
 

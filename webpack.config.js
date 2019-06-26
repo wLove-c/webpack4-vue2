@@ -1,15 +1,19 @@
 // webpack.config.js
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin'); //生成html插件
+// const {CleanWebpackPlugin} = require('clean-webpack-plugin'); // 清除文件
+const ExtractTextPlugin = require("extract-text-webpack-plugin"); //css分离
 
+const ENV = process.env.NODE_ENV;
 module.exports = {  //module.exports commonjs规范
   // entry: './src/main.js', // 项目的入口文件，webpack会从main.js开始，把所有依赖的js都加载打包
   entry: ['babel-polyfill', './src/main.js'], // 项目的入口文件，webpack会从main.js开始，把所有依赖的js都加载打包 参考 https://www.jianshu.com/p/3b27dfc6785c
 
   output: {
     path: path.resolve(__dirname, './dist'), // 项目的打包文件路径
-    publicPath: '/dist/', // 通过devServer访问路径
-    filename: 'build.js' // 打包后的文件名
+    publicPath: '../dist/', // 通过devServer访问路径
+    filename: '[name].[hash].bundle.js' // 打包后的文件名
   },
   devServer: {
     historyApiFallback: true,
@@ -51,5 +55,18 @@ module.exports = {  //module.exports commonjs规范
          exclude: /node_modules/
        }
      ]
-   }
+   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html',
+      inject: true
+    }),
+    new ExtractTextPlugin('style.css'),
+    // new CleanWebpackPlugin({
+    //   root: __dirname,
+    //   verbose: true,
+    //   dry: false
+    // })
+  ],
 }
